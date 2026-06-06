@@ -1,52 +1,30 @@
 # speak-to-ship
 
-## A friend teaches you Wispr Flow
+## A one-week experiment with voice dictation
 
-A conversational guide to Wispr Flow — the voice dictation app that types what you say, minus the "ums" and false starts. No hype. No "vibe coding" manifestos. Just what it does, why you might want it, and how to use it well.
+I'm trying Wispr Flow for a week — not because I'm convinced voice input is the future, but because I'm curious whether it has a narrow, honest use case. I wrote [an essay](https://gurubhat.xyz/posts/what-we-lost-on-the-way-to-faster.html) about what gets lost when you replace typing with voice. I still believe most of it. This experiment is about testing the exceptions.
 
 ---
 
 ## What's in here
 
-- What Flow actually does (and what built-in dictation doesn't)
-- Why speaking prompts to AI tools gets better results than typing them
-- Core features that matter: Auto Edits, Dictionary, Snippets, Styles, Command Mode, Whisper Mode
-- Dev tool integration (Cursor file tagging, syntax awareness, CLI commands)
-- Microphone advice — what you need vs. what the marketing implies you need
-- A real daily workflow, not a productivity fantasy
-- Honest downsides and things the author wishes were different
-- Pricing
-
----
-
-## Why this exists
-
-Flow's marketing site is polished. The help center is thorough. But neither tells you what it's actually like to use this thing day-to-day — the stuff that works, the stuff that's annoying, and the stuff you figure out after a few weeks.
-
-This is that.
-
----
-
-## Where to start
-
-Read the guide once (it's short). Then install Flow and try it for a week. The free trial doesn't require a credit card.
-
-The two things that made the biggest difference for me: setting up a few snippets early (PR checklist, standup template), and learning to just talk normally instead of performing for the mic.
+- What Flow does (and why it's different from built-in dictation)
+- My actual use case: dictating prompts into OpenCode on a MacBook Pro at home
+- Features the tool has that I don't use (and why)
+- Hardware reality: no external mic, just the built-in one
+- Things that broke: transcription failures on longer recordings
+- The open question: does voice dictation earn its place for AI prompting even if the friction of typing is load-bearing for actual writing?
 
 ---
 
 ## Related
 
-- **[opencode-101](https://github.com/pain-in-the-bhat/opencode-101)** — the OpenCode guide, same format, same voice
-- **[Wispr Flow docs](https://docs.wisprflow.ai)** — the official help center
-- **[Wispr Flow for developers](https://wisprflow.ai/developers)** — dev-specific features and demos
+- **[What We Lost on the Way to Faster](https://gurubhat.xyz/posts/what-we-lost-on-the-way-to-faster.html)** — the essay that explains my skepticism
+- **[opencode-101](https://github.com/pain-in-the-bhat/opencode-101)** — the OpenCode guide, same format
+- **[Wispr Flow](https://wisprflow.ai)** — the tool itself
 
 ---
 
 ## License
 
 MIT
-
----
-
-*If something in the guide is wrong or outdated, it probably is. Flow moves fast. PRs welcome.*

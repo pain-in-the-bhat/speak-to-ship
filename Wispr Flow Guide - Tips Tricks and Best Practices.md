@@ -1,159 +1,119 @@
 # A friend teaches you Wispr Flow
 
-I've been using Wispr Flow for a few months now. It's a voice dictation app that works in any text field on your computer or phone. Here's what I wish someone had told me when I started.
+I've been using Wispr Flow for about a week. This is not an endorsement — I wrote [a whole essay](https://gurubhat.xyz/posts/what-we-lost-on-the-way-to-faster.html) about what gets lost when you replace typing with voice. The short version: the friction of typing *is* the thinking. The pause before you commit to a word is selection pressure. Voice collapses that pause. You commit to the first adequate framing instead of the best one.
+
+I still believe that.
+
+But I'm also curious whether there are specific situations where voice dictation earns its place — not as a replacement for thinking-through-typing, but as a tool for a narrower job. So I'm running an experiment: a week of using Flow to dictate prompts into OpenCode on my MacBook Pro, at home, by myself. No external mic. Just talking to my laptop.
+
+This guide is what I've learned so far. It covers what Flow does, what's been useful, what's been broken, and what I'm still undecided about.
 
 ---
 
 ## What it actually does
 
-You press a hotkey, you talk, and Flow types what you said — but cleaned up. No "ums," no false starts, no mid-sentence corrections left in the output. If you say "let's meet at 2, actually 3," it writes "Let's meet at 3." If you ramble, it structures the output.
+You press a hotkey, you talk, and Flow types what you said — but cleaned up. No "ums," no false starts, no mid-sentence corrections left in the output. If you say "let's meet at 2, actually 3," it writes "Let's meet at 3."
 
-This sounds small but it's the difference between a tool you use and one you abandon after a day. Built-in dictation (macOS, Windows, whatever) gives you raw transcripts with every "um" and correction. Reading them back is painful. Flow gives you text that looks like you typed it deliberately.
+This is genuinely different from built-in dictation (macOS, Windows, whatever). Those give you raw transcripts with every "um" and correction. Reading them back is painful. Flow gives you text that looks like you typed it.
 
-It runs on Mac, Windows, iPhone, and Android. Your dictionary, snippets, and settings sync across devices.
-
----
-
-## Why you might want it
-
-The obvious reason is speed. People speak at ~150 words per minute and type at ~40. That math is real, but it undersells what's actually good about it.
-
-The thing I didn't expect: **speaking forces you to give AI more context.** When you type a prompt to an AI coding tool, you tend to be terse — "fix the auth bug." When you speak it, you naturally include more:
-
-"Fix the authentication bug in the login flow. The issue is that the JWT token isn't being refreshed properly after expiry. Check the middleware in auth.ts — we added a refresh mechanism last week but it seems to only work on the first attempt, then fails silently on retries. The user should be redirected to the login page with a message if the refresh fails too."
-
-That second prompt is going to get a much better result from any AI. Flow makes it effortless to produce.
-
-The other reason: **it saves your hands.** If you code all day, adding typing to every Slack message, email, PR description, and doc edit — that adds up. Voice offloads a surprising amount of that.
+It runs on Mac, Windows, iPhone, and Android. It works anywhere there's a text field — your IDE, your terminal, your browser, your messaging apps.
 
 ---
 
-## The core features that actually matter
+## What I'm actually using it for
+
+Just one thing: **dictating prompts into OpenCode.**
+
+When I'm working in the terminal, I hit the Flow hotkey, speak a detailed prompt, and Flow types it into OpenCode's input. That's it. No snippets, no styles, no Cursor file tagging, no Prompt Engineer transforms. I haven't explored any of that.
+
+The theory I'm testing: speaking a prompt forces me to include more context than typing one. When I type "fix the auth bug," I get a short prompt and a hit-or-miss result. When I speak it, I naturally include which file, what the symptoms are, what I already tried. That richer prompt gets better AI output.
+
+Whether that's worth the tradeoff — losing the selection-pressure pause that typing creates — is what I'm trying to figure out.
+
+---
+
+## The features that exist (whether I use them or not)
 
 ### AI Auto Edits
 
-This is the main thing. Flow removes filler words, handles mid-sentence corrections, detects punctuation from pauses and tone, and formats numbered lists automatically. You don't have to think about any of it.
-
-You say: "Um, so the thing is, we need to, uh, add rate limiting to the, actually no, let me think — we need to add rate limiting to the API endpoints for the payments service. It should be, like, 100 requests per minute per user. And we need to return a, you know, a four twenty nine status code when they hit the limit."
-
-Flow writes: "We need to add rate limiting to the API endpoints for the payments service. It should be 100 requests per minute per user, and we need to return a 429 status code when they hit the limit."
+The core thing. Flow removes filler words, handles mid-sentence corrections, detects punctuation from pauses and tone. You don't think about it.
 
 ### Personal Dictionary
 
-Flow learns words you use that aren't in standard dictionaries. When you correct a spelling, it remembers. You can also add terms manually: project names, team member names, framework names, API endpoints.
-
-After a week of use, it stopped misspelling "Supabase" and "Vercel" for me. Small thing, big quality-of-life improvement.
+Flow learns words it doesn't know. When you correct a spelling, it remembers. You can add terms manually: project names, framework names, whatever. It syncs across devices.
 
 ### Snippets
 
-You can set up voice shortcuts for text you type repeatedly. Say a trigger phrase, Flow pastes the full block.
-
-Useful ones I've set up:
-- "pr checklist" → a markdown checklist I use for every PR review
-- "standup update" → a template with yesterday/today/blockers
-- "bug report" → steps to reproduce, expected, actual, environment
-
-The time savings here are honest. If you type the same PR template 20 times a week, that's real.
+Voice shortcuts for text you type repeatedly. Say a trigger phrase, Flow pastes the full block. I haven't set any up.
 
 ### Styles
 
-Desktop and English only for now. Lets you set the tone: formal for docs, casual for Slack, enthusiastic for emails. It adjusts word choice and structure accordingly.
-
-I mostly leave it on casual. The formal mode is useful for client-facing writing.
+Adjusts tone — formal, casual, enthusiastic. Desktop and English only. Haven't used it.
 
 ### Command Mode
 
-You can give Flow instructions like "shorten that paragraph" or "turn this into bullet points" or "make this sound more professional." Access it from the Flow Hub. It's similar to asking an AI to edit text, but it works on whatever you just dictated.
+You can tell Flow to "shorten that paragraph" or "turn this into bullet points." Access it from the Flow Hub.
 
 ### Whisper Mode
 
-Works when you're whispering. Requires a mic close to your mouth — headset, gooseneck, or clip-on lavalier. Useful in open offices, coffee shops, or anywhere you don't want to be the person talking to their computer.
+Works when you're whispering. Needs a mic close to your mouth.
 
 ### Prompt Engineer (Opt+2)
 
-This takes your dictated prompt and automatically structures it for AI tools. It adds a title, role definition, task description, context, and format specification. If you're using Flow to feed prompts into Cursor, Claude, or ChatGPT, this is worth knowing about.
+Takes your dictated prompt and auto-structures it for AI tools — adds a title, role, task description, context, format spec. Haven't used this either.
+
+### Dev tool integration
+
+Flow has specific integration with Cursor and Windsurf (file tagging from speech, syntax awareness) and native integration with Warp terminal. I only use it with OpenCode, so I can't speak to any of this.
 
 ---
 
-## How it works with dev tools
+## Hardware (or lack of it)
 
-### Cursor and Windsurf
+I use the built-in mic on my MacBook Pro. No external hardware. I'm at home, alone, so there's no social awkwardness to manage.
 
-Flow has specific integration with these editors. When you dictate in Cursor or Windsurf, Flow recognizes filenames as you speak and automatically tags the right file in your workspace. This means the AI gets full file context without you manually attaching anything.
+I have AirPods Pro that I might try at some point if I need better audio quality or want to test whisper mode, but I haven't yet.
 
-It also handles code syntax correctly — camelCase, snake_case, acronyms, CLI commands, exact spacing. Dictation used to mangle these. Flow doesn't.
-
-### VS Code, GitHub, Warp Terminal
-
-Flow works in any text field in VS Code — terminal, editor, comments, everything. GitHub PR descriptions and code reviews are voice-friendly. Warp Terminal has native Flow integration for speaking shell commands.
-
-### Everywhere else
-
-Slack, Linear, Notion, Gmail, Obsidian, Google Docs, iMessage, WhatsApp — Flow works anywhere with a text field. It's not app-specific. It's system-level dictation that lands wherever your cursor is.
+If you're considering hardware: wired beats wireless beats Bluetooth for dictation accuracy. Bluetooth mics can be slow to connect, clip the first word, and introduce errors. But honestly, try your built-in mic first. Most audio problems are configuration, not hardware — select your mic manually in Flow's settings instead of using Auto-detect, and make sure your OS and Flow agree on which mic to use.
 
 ---
 
-## Microphone stuff
+## Things that have gone wrong
 
-### You probably don't need new hardware
+### Transcriptions over a minute just... fail
 
-Your built-in mic works fine. Most audio problems are configuration, not hardware. Before buying anything:
+This was the most frustrating issue. For a period, any dictation longer than about a minute would simply not produce output. The recording would stop, no text would appear. I suspect network congestion or a backend timeout, but I never confirmed the cause. It seems to have resolved itself, but it was bad enough that I nearly abandoned the experiment.
 
-- In Flow's mic picker, select your mic manually instead of using Auto-detect
-- Make sure your OS sound settings and Flow agree on which mic to use
-- Restart Flow after switching audio devices
-- Disable virtual microphones (NVIDIA Broadcast, VoiceMeeter, Teams Audio) — they can interfere
+If you're trying Flow and hitting this, know that it's not just you. Restarting the app sometimes helps. Sometimes it doesn't.
 
-Wired earbuds or your webcam mic often work better than the built-in one. Try what you already have first.
+### The learning curve is real
 
-### If you do want better hardware
+The first few days, I sounded like I was reading a script. You have to learn to talk to a computer without sounding like you're talking to a computer. It gets better. But nobody warns you about this.
 
-The hierarchy for dictation accuracy: **wired > WiFi dongle > Bluetooth.** Bluetooth mics can be slow to connect, clip the first word, and introduce transcription errors. If you must go wireless, get something with a USB dongle (like Jabra Evolve2 Buds or Sony INZONE Buds) — they bypass Bluetooth profile switching.
+### Occasional mis-transcriptions of technical terms
 
-For whisper dictation in shared spaces, you need a mic close to your mouth: a gooseneck mic, a podcast USB mic on a boom arm, a clip-on lavalier, or a boom mic that attaches to existing headphones.
-
-### Clamshell mode warning
-
-If you use a MacBook with the lid closed, the built-in mic is disabled. You need an external mic. Flow detects this and will tell you.
+Flow gets most dev jargon right. Sometimes it confidently produces something that sounds like code but isn't. You need to review the output.
 
 ---
 
-## How I actually use it
+## What I'm still trying to figure out
 
-My workflow isn't some elaborate system. It's simple:
+The blog post I wrote in April argued that the friction of typing is load-bearing — it's not waste, it's the process. The pause before you commit to a word is where the thinking happens. Voice collapses that pause.
 
-**Coding:** I type the code. I dictate the prompts to the AI. Speaking a detailed prompt into Cursor with automatic file tagging gets better results than typing a short one. It's not about speed — it's about the quality of context.
+I still think that's true for writing. For constructing an argument. For work where the path to the idea matters as much as the output.
 
-**PR descriptions:** I finish a PR, hit the hotkey, and talk through what I changed and why. Flow formats it. I paste into GitHub. Takes 30 seconds instead of 5 minutes of typing and formatting.
+But dictating a prompt to an AI coding agent is not quite the same activity. It's more like giving instructions to a junior developer — you're describing what you want, not composing an argument. The cognitive mode is different. The stakes are lower. A bad prompt gets a bad result and you iterate.
 
-**Slack and messages:** Any reply longer than two sentences, I dictate. It's faster and, oddly, my dictated messages are better written than my typed ones — probably because speaking forces complete sentences.
-
-**Documentation:** After finishing a feature, I open a doc and describe what I built and how it works. Flow structures it. I clean it up. Documentation that would've taken 45 minutes to type takes 15.
-
-**Commute capture:** I use Flow on my phone when an idea hits. Open a note, dictate it. Review and clean up when I'm back at my desk.
-
----
-
-## Things I wish were different
-
-**The name "Wispr Flow" makes it sound like a meditation app.** I've had to explain to multiple people that it's dictation software, not a wellness product. This is a minor complaint but it's real.
-
-**Styles are English-only and desktop-only.** I understand why — tone detection across languages is genuinely hard — but it means the feature doesn't work on mobile, which is exactly where I'd want it (quick messages on the go).
-
-**The pricing is fair but the team features are enterprise-y.** $12/month for individual Pro is reasonable. Team plans get shared dictionaries and snippets, which are genuinely useful for consistency across a team, but the pricing and setup feel designed for companies with procurement departments, not five-person startups.
-
-**There's a learning curve to dictating naturally.** The first week, I sounded like I was reading a script. You get better at it. Now I talk normally and Flow handles it. But nobody warns you that you have to learn to speak to a computer without sounding like you're speaking to a computer.
-
-**Occasional hallucinations on technical terms.** Flow gets most dev jargon right. Sometimes it confidently writes something that sounds like code but isn't. Like any AI tool, you need to review the output before shipping it.
+So maybe voice dictation has a narrow lane where it's genuinely useful without the friction loss being a problem. Or maybe it doesn't, and after this week I'll go back to typing everything. I don't know yet.
 
 ---
 
 ## Pricing
 
 - **Flow Pro:** $12/month. 14-day free trial, no card required.
-- **Teams:** $12/user/month. Centralized billing, shared dictionaries and snippets, usage dashboards.
+- **Teams:** $12/user/month with centralized billing, shared dictionaries and snippets.
 
-Enterprise plans add SOC 2 Type II, ISO 27001, and enforced HIPAA compliance.
+Enterprise plans add SOC 2 Type II, ISO 27001, and HIPAA compliance.
 
 ---
 
@@ -161,10 +121,8 @@ Enterprise plans add SOC 2 Type II, ISO 27001, and enforced HIPAA compliance.
 
 - **Website:** [wisprflow.ai](https://wisprflow.ai)
 - **Help Center:** [docs.wisprflow.ai](https://docs.wisprflow.ai)
-- **Developer page:** [wisprflow.ai/developers](https://wisprflow.ai/developers)
 - **Microphone guide:** [wisprflow.ai/microphones](https://wisprflow.ai/microphones)
-- **AI prompting guide:** [wisprflow.ai/ai-prompting-guide](https://wisprflow.ai/ai-prompting-guide)
 
 ---
 
-*If something in here is wrong or outdated, it probably is. Wispr Flow updates often. Check the official docs when it matters.*
+*This guide reflects my experience as of June 2026. I'm a week into using Flow, skeptical but curious. If you read this months later and I've either abandoned it or integrated it deeply, neither outcome would surprise me.*
